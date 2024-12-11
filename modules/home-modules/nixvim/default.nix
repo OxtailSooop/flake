@@ -19,7 +19,7 @@ in
         ./plugins/lightline.nix
 				./plugins/nvim-autopairs.nix
 				./plugins/noice.nix
-      ];
+			];
       globals.mapleader = " ";
       opts = {
         autoindent = true;
@@ -29,13 +29,34 @@ in
         wrap = false;
 				shiftwidth = 2;
         tabstop = 2;
-      };
+				cmdheight = 0;
+			};
       keymaps = [
         {
           action = "<cmd>Telescope find_files<CR>";
           key = "<leader>ff";
         }
+        {
+					action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+					key = "<leader>ca";
+				}
+				{
+					action = "<cmd>lua vim.diagnostic.open_float(0, {scope=\"line\"})<CR>";
+					key = "<leader>d";
+				}
       ];
-    };
+			diagnostics.virtual_text = false;
+			extraConfigLuaPost = ''
+			for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+					local default_diagnostic_handler = vim.lsp.handlers[method]
+					vim.lsp.handlers[method] = function(err, result, context, config)
+							if err ~= nil and err.code == -32802 then
+									return
+							end
+							return default_diagnostic_handler(err, result, context, config)
+					end
+			end
+			'';
+		};
 	};
 }
