@@ -18,6 +18,7 @@ in
         ./plugins/web-devicons.nix
         ./plugins/lightline.nix
 				./plugins/nvim-autopairs.nix
+				./plugins/noice.nix
       ];
       globals.mapleader = " ";
       opts = {
