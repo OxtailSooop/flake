@@ -1,9 +1,7 @@
 {
   plugins.lsp = {
     enable = true;
-	 #diagnostics = {
-	 #	refreshSupport = false;
-	 #};
+		inlayHints = true;
 		servers = {
       nixd.enable = true;
       rust_analyzer.enable = true;
