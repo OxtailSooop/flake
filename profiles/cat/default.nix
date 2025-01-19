@@ -24,12 +24,12 @@ in
     ];
 
     btop.enable = true;
-    dunst.enable = true;
+    # dunst.enable = true;
     firefox.enable = true;
     git.enable = true;
-    hyprland.enable = true;
+    # hyprland.enable = true;
     kitty.enable = true;
-    foot.enable = true;
+    # foot.enable = true;
     spicetify.enable = true;
     zsh.enable = true;
     nixvim.enable = true;

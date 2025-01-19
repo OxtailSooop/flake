@@ -22,14 +22,18 @@ in
   ];
 
   nixpkgs.overlays = [
-    nur.overlay
+		nur.overlays.default
   ];
 
-  boot = {
+	boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
-  };
+		plymouth = {
+			enable = true;
+		};
+		# loader.timeout = 0;
+	};
 
   swapDevices = [
     { device = "/var/lib/swapfile";
@@ -52,6 +56,8 @@ in
 
   # Virtualisation
   virtualisation.libvirtd.enable = true;
+
+	environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

@@ -19,6 +19,7 @@ in
         ./plugins/lightline.nix
 				./plugins/nvim-autopairs.nix
 				./plugins/noice.nix
+				./plugins/comment.nix
 			];
       globals.mapleader = " ";
       opts = {
@@ -36,6 +37,34 @@ in
           action = "<cmd>Telescope find_files<CR>";
           key = "<leader>ff";
         }
+				{
+					action = "<cmd>Telescope live_grep<CR>";
+					key = "<leader>lg";
+				}
+				{
+					action = "<cmd>Telescope lsp_type_definitions<CR>";
+					key = "<leader>ltd";
+				}
+				{
+					action = "<cmd>Telescope lsp_definitions<CR>";
+					key = "<leader>ld";
+				}
+				{
+					action = "<cmd>Telescope lsp_implementations<CR>";
+					key = "<leader>li";
+				}
+				{
+					action = "<cmd>Telescope diagnostics";
+					key = "<leader>ld";
+				}
+				{
+					action = "<cmd>Telescope lsp_references<CR>";
+					key = "<leader>lr";
+				}
+				{
+					action = "<cmd>Telescope git_status<CR>";
+					key = "<leader>gs";
+				}
         {
 					action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
 					key = "<leader>ca";

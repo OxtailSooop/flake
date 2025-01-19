@@ -1,6 +1,9 @@
+{ pkgs, ... }:
+
 {
   services = {
-    hardware.openrgb.enable = true;
+		printing.enable = false;
+    #hardware.openrgb.enable = true;
     fstrim.enable = true;
     fwupd.enable = true;
     avahi = {
@@ -16,6 +19,7 @@
       alsa.enable = true;
       pulse.enable = true;
     };
+
     displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = true;
     desktopManager.plasma6.enable = true;

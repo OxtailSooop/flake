@@ -1,52 +1,66 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }:
 
-let
-  hyprpkgs = inputs.hyprland.packages.${pkgs.system};
-  swwwpkg = inputs.swww.packages.${pkgs.system}.swww;
-in
+#let
+# hyprpkgs = inputs.hyprland.packages.${pkgs.system};
+# swwwpkg = inputs.swww.packages.${pkgs.system}.swww;
+#in
 {
+  nixpkgs.config.permittedInsecurePackages = [
+    "dotnet-sdk-6.0.428" # godot uses this
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    #qbittorrent
     vlc
     spotify
     vesktop
-    tor-browser-bundle-bin
+    #tor-browser-bundle-bin
+    brave
+    #ghidra
 
-		libreoffice
-    vim
+    libreoffice
     wget
     git
-    vscode
+    #vscode
     btop
-    obs-studio
-    openrgb
+    #obs-studio
+    #openrgb
+    zed-editor
 
     #catppuccin-gtk
-    catppuccin-cursors.mochaLavender
+    #catppuccin-cursors.mochaLavender
 
-    lunar-client
+    #lunar-client
 
     anki
-    alacritty
+    #alacritty
     kitty
-    wofi
-    swwwpkg
-    hyprpolkitagent
-    dunst
-    hyprshot
-    playerctl
+    #wofi
+    #swwwpkg
+    #hyprpolkitagent
+    #dunst
+    #hyprshot
+    #playerctl
 
-    fastfetch
+    #fastfetch
     #cava # broken?????
-    cbonsai
-    pipes
-    cloc
+    #cbonsai
+    #pipes
+    #cloc
     nixd
+    #tuxguitar
+    godot_4-mono
+		krita
+		gimp
+		libresprite
+		#blender
   ];
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
@@ -56,6 +70,9 @@ in
     kinfocenter
     # kwrite # ???????????
     okular
+    kinfocenter
+    drkonqi
+    kmenuedit
   ];
 
   fonts.packages = with pkgs; [
@@ -66,13 +83,13 @@ in
   ];
 
   # cachix for hyprland
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
+  # nix.settings = {
+  #   substituters = ["https://hyprland.cachix.org"];
+  #   trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  # };
 
   programs = {
-    thunderbird.enable = true;
+    #thunderbird.enable = true;
     firefox.enable = true;
     zsh.enable = true;
     virt-manager.enable = true;
@@ -90,10 +107,14 @@ in
         };
       };
     };
-    hyprland = {
-      enable = true;
-      package = hyprpkgs.hyprland;
-      portalPackage = hyprpkgs.xdg-desktop-portal-hyprland;
-    };
+    # hyprland = {
+    #   enable = true;
+    #   package = hyprpkgs.hyprland;
+    #   portalPackage = hyprpkgs.xdg-desktop-portal-hyprland;
+    # };
+    #steam = {
+    #  enable = true;
+    #  remotePlay.openFirewall = true;
+    #};
   };
 }
